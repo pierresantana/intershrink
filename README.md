@@ -11,7 +11,7 @@ All data must be saved on a database.
 ### Instructions
 
 - Using this repository, work on the challenge by creating a branch with your name (example: `name-surname`).
-- A considerable part of your goal deals with transforming the mockup into a working prototype.
+- A considerable part of your goal deals with transforming the [mockup](mockup.png) into a working prototype.
 - On your project, create a repository called 'project'. All files that you create must be inside this folder.
 - When you're done with your challenge, open a **Merge Request** with your changes.
 
@@ -22,8 +22,8 @@ All data must be saved on a database.
 
 ### Layout
 
-- The used font is Visby CF
-- You can find the necessary images here
+- The used font is [SF Pro Display](https://developer.apple.com/fonts/)
+- You can find the necessary images [here](/images)
 
 **Colors**
 
