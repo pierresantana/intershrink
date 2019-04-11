@@ -1,3 +1,5 @@
+First, make sure to apply on our [oponenning](https://interlink.breezy.hr)! 
+
 ## React Challenge
 
 The challenge consists on a **landing page** capable of generating a functional, shortened *link* based on an *input* of a URL. This project will evaluate the developer' skills and code quality when transforming a *layout* in a functional prototype, along with the backend and frontend properly separated.
