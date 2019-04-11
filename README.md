@@ -32,10 +32,4 @@ All data must be saved on a database.
 - Chicago `#605c5c`
 - Lavender Blush `#fff0f2`
 
-### Differential
-
-- Good Documentation (How to run the project, how the project was organized...);
-- Use of preprocessors CSS (Sass, Less, Stylus);
-- Reposiveness
-
 Create a new issue if you have any question! ;)
