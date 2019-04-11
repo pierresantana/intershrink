@@ -37,3 +37,5 @@ All data must be saved on a database.
 - Good Documentation (How to run the project, how the project was organized...);
 - Use of preprocessors CSS (Sass, Less, Stylus);
 - Reposiveness
+
+Create a new issue if you have any question! ;)
