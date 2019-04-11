@@ -1,4 +1,4 @@
-First, make sure to apply on our [oponenning](https://interlink.breezy.hr)! 
+We're really happy that you want to be part of our team! But first, make sure to apply on our [oponenning](https://interlink.breezy.hr)! 
 
 ## React Challenge
 
@@ -34,4 +34,5 @@ All data must be saved on a database.
 - Chicago `#605c5c`
 - Lavender Blush `#fff0f2`
 
+Good luck!
 Create a new issue if you have any question! ;)
