@@ -1,4 +1,4 @@
-We're really happy that you want to be on our team! But first, make sure to apply on our [oponenning](https://interlink.breezy.hr)! 
+We're really happy that you want to be on our team! But first, make sure to apply on our [openenning](https://interlink.breezy.hr)! 
 
 ## React Challenge
 
