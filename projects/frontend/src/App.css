@@ -1,0 +1,160 @@
+.flex-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+
+.header {
+  width: 100%;
+  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  position: relative;
+}
+
+.header::before {
+  background-image: url("/images/background.jpg");
+  background-size: cover;
+  background-position: center center;
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  opacity: 0.8;
+}
+
+.header::after {
+  background-color: #000000;
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.4;
+}
+
+
+.header .content {
+  width: 1180px;
+  height: 540px;
+  margin: 0 auto;
+  color: #fff;
+}
+
+.header .content .interlink-logo {
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  z-index: 1;
+  top: 24px;
+}
+
+.header .content .interlink-logo img {
+  width: 170px;
+  height: 110px;
+  margin-left: -48px;
+}
+
+.header .content. message {
+  color: #ffffff;
+  min-width: 100%;
+  min-height: 11em;
+  position: relative;
+}
+
+.header .content .title,
+.header .content .sub-title {
+  width: 100%;
+  display: block;
+  text-align: center;
+}
+
+.header .content .title {
+  font-size: 52px;
+  margin-top: 80px;
+}
+
+.header .content .sub-title {
+  font-size: 20px;
+}
+
+.header .content .form {
+  margin: 80px auto;
+  display: block;
+  width: 630px;
+}
+
+.header .content .form input {
+  border: 0;
+  border-radius: 3px 0 0 3px;
+  padding: 15px 25px;
+  width: 450px;
+}
+
+.header .content .form button {
+  background-color: #f6435d;
+  border: 0;
+  border-radius: 0 3px 3px 0;
+  color: #f9f2f2;
+  padding: 15px;
+  cursor: pointer;
+}
+
+.top-title {
+  margin: 42px auto 0 auto;
+  font-size: 42px;
+}
+
+.ranking {
+  width: 700px;
+  margin: 50px auto 60px auto;
+}
+
+.ranking .row {
+  border-bottom: 2px solid #fff0f2;
+  display: block;
+  padding: 20px 20px 10px 20px;
+}
+
+.ranking .row .link {
+  display: inline-block;
+}
+
+.ranking .row .counter {
+  display: inline-block;
+  float: right;
+}
+
+.footer {
+  width: 1180px;
+  margin: 0 auto;
+  height: 40px;
+}
+
+.footer .interlink-footer {
+  display: inline-block;
+  float: left;
+}
+
+.footer .interlink-footer img {
+  width: 22px;
+  height: 22px;
+}
+
+.footer .twitter {
+  display: inline-block;
+  float: right;
+}
+
+.footer .twitter img {
+  width: 22px;
+  height: 22px;
+}
