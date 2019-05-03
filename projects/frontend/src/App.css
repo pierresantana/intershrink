@@ -1,3 +1,8 @@
+.app {
+  width: 100%;
+  height: 100%;
+}
+
 .flex-center {
   display: flex;
   flex-direction: column;
@@ -6,50 +11,23 @@
 }
 
 .header {
-  width: 100%;
-  height: 100%;
-  min-width: 100%;
-  min-height: 100%;
-  position: relative;
-}
-
-.header::before {
   background-image: url("/images/background.jpg");
   background-size: cover;
   background-position: center center;
-  content: "";
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
+  background-repeat: no-repeat;
   width: 100%;
   height: 100%;
-  z-index: -2;
-  opacity: 0.8;
-}
-
-.header::after {
-  background-color: #000000;
-  content: "";
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  opacity: 0.4;
-}
-
-
-.header .content {
-  width: 1180px;
-  height: 540px;
-  margin: 0 auto;
   color: #fff;
 }
 
-.header .content .interlink-logo {
+.header .login {
+  float: right;
+  font-size: 14px;
+  cursor: pointer;
+  padding-top: 10px;
+}
+
+.header .interlink-logo {
   position: absolute;
   width: 110px;
   height: 110px;
@@ -57,55 +35,32 @@
   top: 24px;
 }
 
-.header .content .interlink-logo img {
+.header .interlink-logo img {
   width: 170px;
   height: 110px;
   margin-left: -48px;
 }
 
-.header .content. message {
-  color: #ffffff;
-  min-width: 100%;
-  min-height: 11em;
-  position: relative;
-}
-
-.header .content .title,
-.header .content .sub-title {
+.header .title,
+.header .sub-title {
   width: 100%;
   display: block;
   text-align: center;
 }
 
-.header .content .title {
+.header .title {
   font-size: 52px;
   margin-top: 80px;
 }
 
-.header .content .sub-title {
+.header .sub-title {
   font-size: 20px;
 }
 
-.header .content .form {
+.header .form {
   margin: 80px auto;
   display: block;
   width: 630px;
-}
-
-.header .content .form input {
-  border: 0;
-  border-radius: 3px 0 0 3px;
-  padding: 15px 25px;
-  width: 450px;
-}
-
-.header .content .form button {
-  background-color: #f6435d;
-  border: 0;
-  border-radius: 0 3px 3px 0;
-  color: #f9f2f2;
-  padding: 15px;
-  cursor: pointer;
 }
 
 .top-title {
@@ -125,22 +80,21 @@
 }
 
 .ranking .row .link {
-  display: inline-block;
+  float: left;
+  font-size: 22px;
 }
 
 .ranking .row .counter {
-  display: inline-block;
   float: right;
+  font-size: 22px;
 }
 
 .footer {
-  width: 1180px;
   margin: 0 auto;
   height: 40px;
 }
 
 .footer .interlink-footer {
-  display: inline-block;
   float: left;
 }
 
@@ -150,11 +104,25 @@
 }
 
 .footer .twitter {
-  display: inline-block;
   float: right;
 }
 
 .footer .twitter img {
   width: 22px;
   height: 22px;
+}
+
+.login-modal-body {
+  background-color: #f9f2f2;
+}
+
+.login-option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font-size: 11px;
+}
+
+.login-option .link {
+  cursor: pointer;
 }
