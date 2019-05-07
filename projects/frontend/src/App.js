@@ -8,6 +8,7 @@ import Ranking from './components/ranking';
 import Footer from './components/footer';
 import AuthContext from './contexts/AuthContext';
 import { loadInitialState, reducer } from './reducers/AuthReducer';
+import { redirectToLink } from './utils/url-utils';
 
 function App() {
   const [user, dispatch] = useReducer(reducer, loadInitialState());
@@ -45,9 +46,7 @@ function App() {
   }
 
   function RedirectLink({ match }) {
-    axios.get(`/links/${match.params.link}`)
-      .then((response) => window.location.href = response.data.url)
-      .catch(() => window.location.href = '/');
+    redirectToLink(match.params.link, false);
 
     return <div>Redirecting...</div>;
   }

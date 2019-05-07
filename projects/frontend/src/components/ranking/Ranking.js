@@ -1,15 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import './Ranking.css';
-import { baseUrl } from '../../utils/url-utils';
 import axios from 'axios';
+import { baseUrl, redirectToLink } from '../../utils/url-utils';
 
 function Ranking() {
     const [links, setLinks] = useState([]);
+    const [reload, setReload] = useState(true);
 
     useEffect(() => {
-        axios.get('/links/top')
-            .then((response) => setLinks(response.data.content));
-    }, []);
+        if (reload) {
+            axios.get('/links/top')
+                .then((response) => {
+                    setLinks(response.data.content);
+                    setReload(false);
+                });
+        }
+    }, [reload]);
+
+    function handleRedirect(link) {
+        redirectToLink(link, true)
+            .then(() => setReload(true));
+    }
 
     if (links.length) {
         return (
@@ -20,9 +31,9 @@ function Ranking() {
                     {links.map((item) => (
                         <div key={item.id} className="row">
                             <div className="col-md-10 pointer">
-                                <a href={item.link} target="_blank" rel="noopener noreferrer">
+                                <div className="pointer" onClick={() => handleRedirect(item.link)}>
                                     {baseUrl}/{item.link}
-                                </a>
+                                </div>
                             </div>
                             <div className="col-md-2 text-right">
                                 {item.clicks || 0}

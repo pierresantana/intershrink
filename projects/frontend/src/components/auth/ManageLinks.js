@@ -3,25 +3,34 @@ import './Auth.css';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Table, Pagination, PaginationItem, PaginationLink } from "reactstrap";
 import AuthContext from '../../contexts/AuthContext';
 import { MANAGE_LINKS_CLOSE } from '../../actions/types';
-import { baseUrl } from '../../utils/url-utils';
+import { baseUrl, redirectToLink } from '../../utils/url-utils';
 
 function ManageLinks() {
     const { user, dispatch, axios } = useContext(AuthContext);
     const [links, setLinks] = useState([]);
     const [page, setPage] = useState(0);
     const [total, setTotal] = useState(0);
+    const [reload, setReload] = useState(true);
     const limit = 10;
 
     useEffect(() => {
-        axios.get(`/links?limit=${limit}&page=${page}`)
-            .then((response) => {
-                setLinks(response.data.content);
-                setTotal(Math.ceil(response.data.total / limit));
-            });
-    }, [page]);
+        if (reload) {
+            axios.get(`/links?limit=${limit}&page=${page}`)
+                .then((response) => {
+                    setLinks(response.data.content);
+                    setTotal(Math.ceil(response.data.total / limit));
+                    setReload(false);
+                });
+        }
+    }, [page, reload]);
 
     function closeModal() {
         dispatch({ type: MANAGE_LINKS_CLOSE });
+    }
+
+    function handleRedirect(link) {
+        redirectToLink(link, true)
+            .then(() => setReload(true));
     }
 
     return (
@@ -44,11 +53,15 @@ function ManageLinks() {
                                 {links.map((l, i) => (
                                     <tr key={i}>
                                         <td>
-                                            <a href={`${baseUrl}/${l.link}`} target="_blank" rel="noopener noreferrer">
+                                            <div className="pointer" onClick={() => handleRedirect(l.link)}>
                                                 {baseUrl}/{l.link}
-                                            </a>
+                                            </div>
                                         </td>
-                                        <td>{l.title || '-'}</td>
+                                        <td>
+                                            <div className="ellipsis">
+                                                {l.title || '-'}
+                                            </div>
+                                        </td>
                                         <td>{l.clicks || 0}</td>
                                     </tr>
                                 ))}

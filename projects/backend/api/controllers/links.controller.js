@@ -12,9 +12,7 @@ exports.list = (req, res) => {
         if (req.query.page >= 0) {
             page = parseInt(req.query.page);
         }
-        if (_.isString(req.query.tag)) {
-            filter.tags = new RegExp(`^${req.query.tag}$`, 'i');
-        }
+        filter._userId = req.jwt.userId;
     }
     
     let params = {

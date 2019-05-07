@@ -1,5 +1,4 @@
 const config = require('./config/config.env');
-
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
@@ -24,6 +23,8 @@ app.use(function (req, res, next) {
 app.use(bodyParser.json());
 Routers(app);
 
-app.listen(config.port, function () {
+const server = app.listen(config.port, () => {
     console.log('running server at port http://localhost:%s', config.port);
 });
+
+module.exports = server;
