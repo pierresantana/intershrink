@@ -1,0 +1,27 @@
+
+.footer {
+    margin: 0 auto;
+    padding: 15px;
+    background-color: #fff;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+  
+.footer .interlink-footer {
+    float: left;
+}
+
+.footer .interlink-footer img {
+    width: 22px;
+    height: 22px;
+}
+
+.footer .twitter {
+    float: right;
+}
+
+.footer .twitter img {
+    width: 22px;
+    height: 22px;
+}

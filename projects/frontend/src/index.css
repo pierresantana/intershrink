@@ -9,6 +9,13 @@ body {
   color: #605c5c;
 }
 
+.flex-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  align-content: center;
+}
+
 a, input, button {
   color: #605c5c;
 }
@@ -27,5 +34,24 @@ a {
 .btn-interlink:focus {
   background-color: #fd677d;
   border: 1px solid #e7334e;
+  color: #f9f2f2;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.page-link {
+  color: #605c5c;
+}
+
+.page-link:hover {
+  background-color: #f9f2f2;
+  color: #605c5c;
+}
+
+.page-item.active .page-link {
+  background-color: #f6435d;
+  border: 1px solid #d61936;
   color: #f9f2f2;
 }

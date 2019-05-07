@@ -1,0 +1,24 @@
+.top-title {
+    margin: 42px auto 0 auto;
+    font-size: 42px;
+}
+
+.ranking {
+    width: 700px;
+    margin: 50px auto 60px auto;
+    font-size: 22px;
+}
+
+.ranking .row {
+    border-bottom: 2px solid #fff0f2;
+    padding: 20px 20px 10px 20px;
+}
+
+.ranking .row .link {
+    float: left;
+}
+
+.ranking .row .counter {
+    float: right;
+    font-size: 22px;
+}

@@ -3,28 +3,18 @@
   height: 100%;
 }
 
-.flex-center {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
-}
-
 .header {
-  background-image: url("/images/background.jpg");
+  background-image: linear-gradient(rgba(50, 50, 50, 0.5), rgba(50, 50, 50, 0.4)), url("/images/background.jpg");
   background-size: cover;
-  background-position: center center;
+  background-position: center;
   background-repeat: no-repeat;
   width: 100%;
-  height: 100%;
+  height: 550px;
   color: #fff;
 }
 
-.header .login {
-  float: right;
-  font-size: 14px;
-  cursor: pointer;
-  padding-top: 10px;
+.header .message {
+  padding: 10px 0;
 }
 
 .header .interlink-logo {
@@ -55,74 +45,4 @@
 
 .header .sub-title {
   font-size: 20px;
-}
-
-.header .form {
-  margin: 80px auto;
-  display: block;
-  width: 630px;
-}
-
-.top-title {
-  margin: 42px auto 0 auto;
-  font-size: 42px;
-}
-
-.ranking {
-  width: 700px;
-  margin: 50px auto 60px auto;
-}
-
-.ranking .row {
-  border-bottom: 2px solid #fff0f2;
-  display: block;
-  padding: 20px 20px 10px 20px;
-}
-
-.ranking .row .link {
-  float: left;
-  font-size: 22px;
-}
-
-.ranking .row .counter {
-  float: right;
-  font-size: 22px;
-}
-
-.footer {
-  margin: 0 auto;
-  height: 40px;
-}
-
-.footer .interlink-footer {
-  float: left;
-}
-
-.footer .interlink-footer img {
-  width: 22px;
-  height: 22px;
-}
-
-.footer .twitter {
-  float: right;
-}
-
-.footer .twitter img {
-  width: 22px;
-  height: 22px;
-}
-
-.login-modal-body {
-  background-color: #f9f2f2;
-}
-
-.login-option {
-  display: block;
-  width: 100%;
-  text-align: left;
-  font-size: 11px;
-}
-
-.login-option .link {
-  cursor: pointer;
 }

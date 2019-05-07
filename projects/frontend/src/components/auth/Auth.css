@@ -1,0 +1,18 @@
+.login {
+  float: right;
+  font-size: 14px;
+  cursor: pointer;
+  padding-top: 10px;
+}
+
+.login-modal-body {
+  background-color: #f9f2f2;
+}
+
+.login-option {
+  font-size: 11px;
+}
+
+.userDropdownMenu {
+  font-size: 12px;
+}
