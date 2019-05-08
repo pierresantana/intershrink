@@ -1,13 +1,13 @@
 import React from 'react';
 import './Auth.css';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button, Label, Input, Form, FormGroup, InputGroup, InputGroupAddon, FormFeedback } from "reactstrap";
-import { login_close_create_modal, login_user_success } from '../../actions';
+import { loginCloseCreateModal, loginUserSuccess, addToasts } from '../../actions';
 import useForm from "../../hooks/use-form";
 import validate from './CreateFormValidation';
 import axios from 'axios';
 import connect from '../../connect';
 
-function CreateForm({ auth, login_close_create_modal, login_user_success }) {
+function CreateForm({ auth, loginCloseCreateModal, loginUserSuccess, addToasts }) {
     const {
         values,
         errors,
@@ -19,23 +19,19 @@ function CreateForm({ auth, login_close_create_modal, login_user_success }) {
         const { confirmPassword, ...payload } = values;
         axios.post('/users', payload)
             .then(() => login({email: payload.email, password: payload.password }))
-            .catch(err => console.log(err));
+            .catch(err => addToasts(err.response.data.errors));
     };
 
     function login(payload) {
         axios.post('/auth', payload)
-            .then(response => login_user_success(response.data))
-            .catch(err => console.log(err));
-    }
-
-    function closeModal() {
-        login_close_create_modal();
+            .then(response => loginUserSuccess(response.data))
+            .catch(err => addToasts(err.response.data.errors));
     }
 
     return (
         <Modal isOpen={auth.showCreateModal}>
             <Form onSubmit={handleSubmit} noValidate>
-                <ModalHeader toggle={closeModal}>
+                <ModalHeader toggle={loginCloseCreateModal}>
                     Create an Account
             </ModalHeader>
                 <ModalBody className="login-modal-body">
@@ -127,7 +123,7 @@ function CreateForm({ auth, login_close_create_modal, login_user_success }) {
                         </div>
                         </InputGroupAddon>
                         <Button className="mr-2"
-                            onClick={closeModal}>
+                            onClick={loginCloseCreateModal}>
                             Close
                     </Button>
                         <Button color="interlink"
@@ -147,8 +143,9 @@ const mapStateToProps = store => ({
 });
 
 const mapDispathToProps = dispatch => ({
-    login_close_create_modal: param => dispatch(login_close_create_modal(param)),
-    login_user_success: param => dispatch(login_user_success(param))
+    loginCloseCreateModal: param => dispatch(loginCloseCreateModal(param)),
+    loginUserSuccess: param => dispatch(loginUserSuccess(param)),
+    addToasts: param => dispatch(addToasts(param))
 });
 
 export default connect(

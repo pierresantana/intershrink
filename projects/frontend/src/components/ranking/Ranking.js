@@ -3,16 +3,17 @@ import './Ranking.css';
 import axios from 'axios';
 import { baseUrl, redirectToLink } from '../../utils/url-utils';
 import connect from '../../connect';
-import { loadTopLinks, updateTopLinks } from '../../actions';
+import { loadTopLinks, updateTopLinks, addToasts } from '../../actions';
 
-function Ranking({ topLinks, loadTopLinks, updateTopLinks }) {
+function Ranking({ topLinks, loadTopLinks, updateTopLinks, addToasts }) {
 
     useEffect(() => {
         if (topLinks.loading) {
             axios.get('/links/top')
                 .then((response) => {
                     updateTopLinks(response.data.content);
-                });
+                })
+                .catch(err => addToasts(err.response.data.errors));
         }
     }, [topLinks.loading]);
 
@@ -53,7 +54,8 @@ const mapStateToProps = store => ({
 
 const mapDispathToProps = dispatch => ({
     loadTopLinks: param => dispatch(loadTopLinks(param)),
-    updateTopLinks: param => dispatch(updateTopLinks(param))
+    updateTopLinks: param => dispatch(updateTopLinks(param)),
+    addToasts: param => dispatch(addToasts(param))
 });
 
 export default connect(

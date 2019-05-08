@@ -10,6 +10,20 @@
   height: 45px;
 }
 
+.form .loadingSpinner {
+  position: absolute;
+  color: #605c5c;
+  z-index: 1;
+  width: 100%;
+  top: 15px;
+  right: 0;
+  margin-right: 110px;
+}
+
+.form .loadingSpinner .fa-spinner {
+  float: right;
+}
+
 .form .alert {
   margin-top: 35px;
 }

@@ -11,6 +11,6 @@ exports.linkValidator = async (req, res, next) => {
 
         return next();
     } else {
-        return errorHandler(res, 'Missing url field');
+        return errorHandler(res, ['Missing url field']);
     }
 };

@@ -1,74 +1,39 @@
-export const token_changed = (payload) => ({
-    type: 'TOKEN_CHANGED',
-    payload
-});
-
-export const password_changed = (payload) => ({
-    type: 'PASSWORD_CHANGED',
-    payload
-});
-
-export const login_user_success = (payload) => ({
+export const loginUserSuccess = (payload) => ({
     type: 'LOGIN_USER_SUCCESS',
     payload
 });
 
-export const login_user_fail = (payload) => ({
-    type: 'LOGIN_USER_FAIL',
-    payload
-});
-
-export const login_user = (payload) => ({
-    type: 'LOGIN_USER',
-    payload
-});
-
-export const login_open_modal = (payload) => ({
+export const loginOpenModal = (payload) => ({
     type: 'LOGIN_OPEN_MODAL',
     payload
 });
 
-export const login_close_modal = (payload) => ({
+export const loginCloseModal = (payload) => ({
     type: 'LOGIN_CLOSE_MODAL',
     payload
 });
 
-export const login_open_create_modal = (payload) => ({
+export const loginOpenCreateModal = (payload) => ({
     type: 'LOGIN_OPEN_CREATE_MODAL',
     payload
 });
 
-export const login_close_create_modal = (payload) => ({
+export const loginCloseCreateModal = (payload) => ({
     type: 'LOGIN_CLOSE_CREATE_MODAL',
     payload
 });
 
-export const logout_user = (payload) => ({
+export const logoutUser = (payload) => ({
     type: 'LOGOUT_USER',
     payload
 });
 
-export const link_create = (payload) => ({
-    type: 'LINK_CREATE',
-    payload
-});
-
-export const link_fetch_success = (payload) => ({
-    type: 'LINK_FETCH_SUCCESS',
-    payload
-});
-
-export const link_fetch_fail = (payload) => ({
-    type: 'LINK_FETCH_FAIL',
-    payload
-});
-
-export const manage_links_open = (payload) => ({
+export const manageLinksOpen = (payload) => ({
     type: 'MANAGE_LINKS_OPEN',
     payload
 });
 
-export const manage_links_close = (payload) => ({
+export const manageLinksClose = (payload) => ({
     type: 'MANAGE_LINKS_CLOSE',
     payload
 });
@@ -79,5 +44,15 @@ export const loadTopLinks = () => ({
 
 export const updateTopLinks = (payload) => ({
     type: 'TOP_LINKS_LOADED',
+    payload
+});
+
+export const addToasts = (payload) => ({
+    type: 'ADD_TOASTS',
+    payload
+});
+
+export const removeToasts = (payload) => ({
+    type: 'REMOVE_TOASTS',
     payload
 });

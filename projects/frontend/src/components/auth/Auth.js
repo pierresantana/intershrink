@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Auth.css';
-import { login_open_modal, logout_user, manage_links_open } from '../../actions';
+import { loginOpenModal, logoutUser, manageLinksOpen } from '../../actions';
 import { ButtonDropdown, DropdownMenu, DropdownToggle, DropdownItem } from 'reactstrap';
 import LoginForm from './LoginForm';
 import CreateForm from './CreateForm';
@@ -57,9 +57,9 @@ const mapStateToProps = store => ({
 });
 
 const mapDispathToProps = dispatch => ({
-    openLoginModal: param => dispatch(login_open_modal(param)),
-    logoutUser: param => dispatch(logout_user(param)),
-    openManageLinks: param => dispatch(manage_links_open(param))
+    openLoginModal: param => dispatch(loginOpenModal(param)),
+    logoutUser: param => dispatch(logoutUser(param)),
+    openManageLinks: param => dispatch(manageLinksOpen(param))
 });
 
 export default connect(

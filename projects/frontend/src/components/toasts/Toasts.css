@@ -1,0 +1,25 @@
+.toasts {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 350px;
+    z-index: 10000;
+}
+
+.toasts .toast {
+    float: right;
+    margin: 15px;
+    padding: 10px;
+    width: 300px;
+}
+
+.toasts .toast,
+.toasts .toast .toast-header {
+    background-color: #f9f2f2;
+    color: #605c5c;
+    border: 0;
+}
+
+.toasts .toast button {
+    margin-left: 10px;
+}

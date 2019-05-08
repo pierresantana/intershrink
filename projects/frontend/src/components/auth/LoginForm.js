@@ -1,13 +1,13 @@
 import React from 'react';
 import './Auth.css';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, InputGroup, Input, InputGroupAddon, InputGroupText, FormFeedback } from 'reactstrap';
-import { login_close_modal, login_open_create_modal, login_user_success } from '../../actions';
+import { loginCloseModal, loginOpenCreateModal, loginUserSuccess, addToasts } from '../../actions';
 import useForm from "../../hooks/use-form";
 import validate from './LoginFormValidation';
 import axios from 'axios';
 import connect from '../../connect';
 
-function LoginForm({ auth, login_close_modal, login_open_create_modal, login_user_success }) {
+function LoginForm({ auth, loginCloseModal, loginOpenCreateModal, loginUserSuccess, addToasts }) {
     const {
         values,
         errors,
@@ -17,14 +17,14 @@ function LoginForm({ auth, login_close_modal, login_open_create_modal, login_use
 
     function login() {
         axios.post('/auth', values)
-            .then(response => login_user_success(response.data))
-            .catch(err => console.log(err));
+            .then(response => loginUserSuccess(response.data))
+            .catch(err => addToasts(err.response.data.errors));
     }
 
     return (
         <Modal size="sm" isOpen={auth.showLoginModal}>
             <Form onSubmit={handleSubmit} noValidate>
-                <ModalHeader toggle={() => login_close_modal()}>
+                <ModalHeader toggle={() => loginCloseModal()}>
                     Log In To Your Account
                 </ModalHeader>
                 <ModalBody className="login-modal-body">
@@ -43,10 +43,10 @@ function LoginForm({ auth, login_close_modal, login_open_create_modal, login_use
                                     <i className="fas fa-at"></i>
                                 </InputGroupText>
                             </InputGroupAddon>
+                            {errors.email && (
+                                <FormFeedback>{errors.email}</FormFeedback>
+                            )}
                         </InputGroup>
-                        {errors.email && (
-                            <FormFeedback>{errors.email}</FormFeedback>
-                        )}
                     </FormGroup>
 
                     <FormGroup>
@@ -65,17 +65,17 @@ function LoginForm({ auth, login_close_modal, login_open_create_modal, login_use
                                     <i className="fas fa-key"></i>
                                 </InputGroupText>
                             </InputGroupAddon>
+                            {errors.password && (
+                                <FormFeedback>{errors.password}</FormFeedback>
+                            )}
                         </InputGroup>
-                        {errors.password && (
-                            <FormFeedback>{errors.password}</FormFeedback>
-                        )}
                     </FormGroup>
                 </ModalBody>
                 <ModalFooter>
                     <InputGroup>
                         <InputGroupAddon addonType="prepend" className="flex-column mr-auto my-auto">
                             <div className="login-option flex-row">
-                                <div className="pointer" onClick={() => login_open_create_modal()}>Create an Account</div>
+                                <div className="pointer" onClick={() => loginOpenCreateModal()}>Create an Account</div>
                             </div>
                         </InputGroupAddon>
                         <Button color="interlink" type="submit">
@@ -93,9 +93,10 @@ const mapStateToProps = store => ({
 });
 
 const mapDispathToProps = dispatch => ({
-    login_close_modal: param => dispatch(login_close_modal(param)),
-    login_open_create_modal: param => dispatch(login_open_create_modal(param)),
-    login_user_success: param => dispatch(login_user_success(param))
+    loginCloseModal: param => dispatch(loginCloseModal(param)),
+    loginOpenCreateModal: param => dispatch(loginOpenCreateModal(param)),
+    loginUserSuccess: param => dispatch(loginUserSuccess(param)),
+    addToasts: param => dispatch(addToasts(param))
 });
 
 export default connect(

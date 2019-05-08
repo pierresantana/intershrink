@@ -6,12 +6,12 @@ import Auth from './components/auth';
 import UrlShortner from './components/url-shortner';
 import Ranking from './components/ranking';
 import Footer from './components/footer';
+import Toasts from './components/toasts';
 import { redirectToLink } from './utils/url-utils';
 import connect from './connect';
 
 function App({auth}) {
   useEffect(() => {
-    console.log(auth);
     if (auth.accessToken) {
       axios.defaults.headers.common['Authorization'] = `Bearer ${auth.accessToken}`;
     }
@@ -20,6 +20,8 @@ function App({auth}) {
   function Home() {
     return (
       <div className="app">
+        <Toasts />
+        
         <header className="header flex-center">
           <div className="container">
             <Auth />
@@ -61,7 +63,7 @@ const mapStateToProps = store => ({
   auth: store.auth
 });
 
-const mapDispathToProps = dispatch => ({});
+const mapDispathToProps = () => ({});
 
 export default connect(
   mapStateToProps,

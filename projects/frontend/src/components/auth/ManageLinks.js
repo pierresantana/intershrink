@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './Auth.css';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Table, Pagination, PaginationItem, PaginationLink } from "reactstrap";
-import { manage_links_close } from '../../actions';
+import { manageLinksClose, addToasts } from '../../actions';
 import { baseUrl, redirectToLink } from '../../utils/url-utils';
 import axios from 'axios';
 import connect from '../../connect';
 
-function ManageLinks({ auth, manage_links_close }) {
+function ManageLinks({ auth, manageLinksClose, addToasts }) {
     const [links, setLinks] = useState([]);
     const [page, setPage] = useState(0);
     const [total, setTotal] = useState(0);
@@ -20,13 +20,10 @@ function ManageLinks({ auth, manage_links_close }) {
                     setLinks(response.data.content);
                     setTotal(Math.ceil(response.data.total / limit));
                     setReload(false);
-                });
+                })
+                .catch(err => addToasts(err.response.data.errors));
         }
     }, [page, reload]);
-
-    function closeModal() {
-        manage_links_close();
-    }
 
     function handleRedirect(link) {
         redirectToLink(link, true)
@@ -35,7 +32,7 @@ function ManageLinks({ auth, manage_links_close }) {
 
     return (
         <Modal size="lg" isOpen={auth.showManageLinks}>
-            <ModalHeader toggle={closeModal}>
+            <ModalHeader toggle={manageLinksClose}>
                 Track your links
             </ModalHeader>
             <ModalBody className="login-modal-body">
@@ -93,7 +90,8 @@ const mapStateToProps = store => ({
 });
 
 const mapDispathToProps = dispatch => ({
-    manage_links_close: param => dispatch(manage_links_close(param))
+    manageLinksClose: param => dispatch(manageLinksClose(param)),
+    addToasts: param => dispatch(addToasts(param))
 });
 
 export default connect(
