@@ -1,50 +1,49 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import './Auth.css';
-import AuthContext from '../../contexts/AuthContext';
-import { LOGIN_OPEN_MODAL, LOGOUT_USER, MANAGE_LINKS_OPEN } from '../../actions/types';
+import { login_open_modal, logout_user, manage_links_open } from '../../actions';
 import { ButtonDropdown, DropdownMenu, DropdownToggle, DropdownItem } from 'reactstrap';
 import LoginForm from './LoginForm';
 import CreateForm from './CreateForm';
 import ManageLinks from './ManageLinks';
+import connect from '../../connect';
 
-function Auth() {
-    const { user, dispatch } = useContext(AuthContext);
+function Auth({ auth, openLoginModal, openManageLinks, logoutUser }) {
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
     return (
         <div>
-            {user.loggedIn
+            {auth.accessToken
                 ? (
                     <div className="login">
                         <ButtonDropdown size="sm" isOpen={dropdownOpen} toggle={() => setDropdownOpen(!dropdownOpen)}>
                             <DropdownToggle caret color="interlink">
-                                <i className="fas fa-user"></i> {user.firstName} {user.lastName}
+                                <i className="fas fa-user"></i> {auth.firstName} {auth.lastName}
                             </DropdownToggle>
                             <DropdownMenu className="userDropdownMenu" size="sm">
-                                <DropdownItem onClick={() => dispatch({ type: MANAGE_LINKS_OPEN })}>
+                                <DropdownItem onClick={() => openManageLinks()}>
                                     <i className="fas fa-link"></i> Track links
                                 </DropdownItem>
                                 <DropdownItem divider />
-                                <DropdownItem onClick={() => dispatch({ type: LOGOUT_USER })}>
+                                <DropdownItem onClick={() => logoutUser()}>
                                     <i className="fas fa-sign-out-alt"></i> Logout
                                 </DropdownItem>
                             </DropdownMenu>
                         </ButtonDropdown>
                         
-                        {user.showManageLinks && (<ManageLinks />)}
+                        {auth.showManageLinks && (<ManageLinks />)}
                     </div>
                 )
                 : (
                     <div>
                         <div className="login"
-                            onClick={() => dispatch({ type: LOGIN_OPEN_MODAL })}
+                            onClick={() => openLoginModal()}
                         >
                             <i className="fas fa-user"></i> Log In
                         </div>
 
-                        {user.showLoginModal && (<LoginForm />)}
+                        {auth.showLoginModal && (<LoginForm />)}
 
-                        {user.showCreateModal && (<CreateForm />)}
+                        {auth.showCreateModal && (<CreateForm />)}
                     </div>
                 )
             }
@@ -53,4 +52,17 @@ function Auth() {
     );
 }
 
-export default Auth;
+const mapStateToProps = store => ({
+    auth: store.auth
+});
+
+const mapDispathToProps = dispatch => ({
+    openLoginModal: param => dispatch(login_open_modal(param)),
+    logoutUser: param => dispatch(logout_user(param)),
+    openManageLinks: param => dispatch(manage_links_open(param))
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispathToProps
+)(Auth);

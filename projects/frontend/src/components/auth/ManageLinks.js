@@ -1,12 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Auth.css';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Table, Pagination, PaginationItem, PaginationLink } from "reactstrap";
-import AuthContext from '../../contexts/AuthContext';
-import { MANAGE_LINKS_CLOSE } from '../../actions/types';
+import { manage_links_close } from '../../actions';
 import { baseUrl, redirectToLink } from '../../utils/url-utils';
+import axios from 'axios';
+import connect from '../../connect';
 
-function ManageLinks() {
-    const { user, dispatch, axios } = useContext(AuthContext);
+function ManageLinks({ auth, manage_links_close }) {
     const [links, setLinks] = useState([]);
     const [page, setPage] = useState(0);
     const [total, setTotal] = useState(0);
@@ -25,7 +25,7 @@ function ManageLinks() {
     }, [page, reload]);
 
     function closeModal() {
-        dispatch({ type: MANAGE_LINKS_CLOSE });
+        manage_links_close();
     }
 
     function handleRedirect(link) {
@@ -34,7 +34,7 @@ function ManageLinks() {
     }
 
     return (
-        <Modal size="lg" isOpen={user.showManageLinks}>
+        <Modal size="lg" isOpen={auth.showManageLinks}>
             <ModalHeader toggle={closeModal}>
                 Track your links
             </ModalHeader>
@@ -88,4 +88,15 @@ function ManageLinks() {
     );
 }
 
-export default ManageLinks;
+const mapStateToProps = store => ({
+    auth: store.auth
+});
+
+const mapDispathToProps = dispatch => ({
+    manage_links_close: param => dispatch(manage_links_close(param))
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispathToProps
+)(ManageLinks);

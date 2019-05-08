@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import './App.css';
 import axios from 'axios';
@@ -6,18 +6,16 @@ import Auth from './components/auth';
 import UrlShortner from './components/url-shortner';
 import Ranking from './components/ranking';
 import Footer from './components/footer';
-import AuthContext from './contexts/AuthContext';
-import { loadInitialState, reducer } from './reducers/AuthReducer';
 import { redirectToLink } from './utils/url-utils';
+import connect from './connect';
 
-function App() {
-  const [user, dispatch] = useReducer(reducer, loadInitialState());
-
+function App({auth}) {
   useEffect(() => {
-    if (user.loggedIn) {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${user.accessToken}`;
+    console.log(auth);
+    if (auth.accessToken) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${auth.accessToken}`;
     }
-  }, [user.accessToken]);
+  }, [auth.accessToken]);
 
   function Home() {
     return (
@@ -52,13 +50,20 @@ function App() {
   }
 
   return (
-    <AuthContext.Provider value={{ user, dispatch, axios }}>
-      <Router>
-        <Route exact path="/:link" component={RedirectLink} />
-        <Route exact path="/" component={Home} />
-      </Router>
-    </AuthContext.Provider>
+    <Router>
+      <Route exact path="/:link" component={RedirectLink} />
+      <Route exact path="/" component={Home} />
+    </Router>
   );
 }
 
-export default App;
+const mapStateToProps = store => ({
+  auth: store.auth
+});
+
+const mapDispathToProps = dispatch => ({});
+
+export default connect(
+  mapStateToProps,
+  mapDispathToProps
+)(App);

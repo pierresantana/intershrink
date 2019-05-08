@@ -1,34 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import './Ranking.css';
 import axios from 'axios';
 import { baseUrl, redirectToLink } from '../../utils/url-utils';
+import connect from '../../connect';
+import { loadTopLinks, updateTopLinks } from '../../actions';
 
-function Ranking() {
-    const [links, setLinks] = useState([]);
-    const [reload, setReload] = useState(true);
+function Ranking({ topLinks, loadTopLinks, updateTopLinks }) {
 
     useEffect(() => {
-        if (reload) {
+        if (topLinks.loading) {
             axios.get('/links/top')
                 .then((response) => {
-                    setLinks(response.data.content);
-                    setReload(false);
+                    updateTopLinks(response.data.content);
                 });
         }
-    }, [reload]);
+    }, [topLinks.loading]);
 
     function handleRedirect(link) {
         redirectToLink(link, true)
-            .then(() => setReload(true));
+            .then(() => loadTopLinks());
     }
 
-    if (links.length) {
+    if (topLinks.list.length) {
         return (
             <div className="flex-center">
-                <div className="top-title">Top {links.length}</div>
+                <div className="top-title">Top {topLinks.list.length}</div>
 
                 <div className="ranking">
-                    {links.map((item) => (
+                    {topLinks.list.map((item) => (
                         <div key={item.id} className="row">
                             <div className="col-md-10 pointer">
                                 <div className="pointer" onClick={() => handleRedirect(item.link)}>
@@ -48,4 +47,16 @@ function Ranking() {
     return null;
 }
 
-export default Ranking;
+const mapStateToProps = store => ({
+    topLinks: store.topLinks
+});
+
+const mapDispathToProps = dispatch => ({
+    loadTopLinks: param => dispatch(loadTopLinks(param)),
+    updateTopLinks: param => dispatch(updateTopLinks(param))
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispathToProps
+)(Ranking);

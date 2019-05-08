@@ -1,13 +1,12 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useState, useRef } from 'react';
 import './UrlShortner.css';
 import { Form, FormGroup, Button, InputGroup, Input, InputGroupAddon, Alert } from "reactstrap";
-import AuthContext from '../../contexts/AuthContext';
-import { LOGIN_OPEN_MODAL } from '../../actions/types';
+import { login_open_modal } from '../../actions';
 import { baseUrl } from '../../utils/url-utils';
 import axios from 'axios';
+import connect from '../../connect';
 
-function UrlShortner() {
-    const { user, dispatch } = useContext(AuthContext);
+function UrlShortner({ auth, login_open_modal }) {
     const [urlLink, setUrlLink] = useState('');
     const [saved, setSaved] = useState(false);
     const urlLinkRef = useRef();
@@ -72,11 +71,11 @@ function UrlShortner() {
                 </InputGroup>
                 {
                     saved && (
-                        user.loogedIn 
+                        auth.loogedIn 
                             ? <Alert color="light">Your link is add to your account.</Alert>
                             : <Alert color="light">
                                 Would you like track your links?
-                                <div className="float-right pointer" onClick={() => dispatch({ type: LOGIN_OPEN_MODAL })}><b>Create an account</b></div>
+                                <div className="float-right pointer" onClick={() => login_open_modal()}><b>Create an account</b></div>
                             </Alert>
                     )
                 }
@@ -85,4 +84,15 @@ function UrlShortner() {
     );
 }
 
-export default UrlShortner;
+const mapStateToProps = store => ({
+    auth: store.auth
+});
+
+const mapDispathToProps = dispatch => ({
+    login_open_modal: param => dispatch(login_open_modal(param))
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispathToProps
+)(UrlShortner);
